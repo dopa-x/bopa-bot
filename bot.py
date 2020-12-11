@@ -27,6 +27,7 @@ async def log_print(text):
 @client.event
 async def on_ready():
     await log_print('[' + datetime.now().strftime("%x %X") + ']' + ' ' + f'{client.user} has connected to Discord!')
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="your every move!"))
     
 @client.command(name='s')
 async def say(message):
@@ -35,7 +36,7 @@ async def say(message):
         await message.send(text)
         await message.message.delete()
         await log_print('[' + datetime.now().strftime("%x %X") + ']' + ' Said \"' + text + '\"!')
-        
+
 @client.command(name='op')
 async def op(message, text):
     if (message.author.id == dopa):
@@ -81,7 +82,7 @@ async def goneify(message, text):
         strippedtext = str(strippedtext)
         await log_print('[' + datetime.now().strftime("%x %X") + ']' + ' Added \"' + strippedtext + '\" to the GONE list!')
              
-@client.command(name='ug')
+@client.command(name='sg')
 async def ungoneify(message, text):
     if (message.author.id in ACCESS_list):
         strippedtext = int(text.strip('<>!@'))
